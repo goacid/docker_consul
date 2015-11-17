@@ -8,11 +8,11 @@ c=$(echo $a|tr " " "\\n"|sort|uniq|sed -re "s/(^10.[0-9.]*):.*/-retry-join=\\1/"
 if [[ $c ]]; then
   total_server="$(echo ${c} | tr " " "\n"| grep -c join )"
   if [[  total_server < 3 ]]; then
-    echo "-server $c"
+    echo "CONSUL_START=-server $c"
   else
-    echo "$c"
+    echo "CONSUL_START=$c"
   fi
 else
-  echo "-server -bootstrap-expect 3"
+  echo "CONSUL_START=-server -bootstrap-expect 3"
 fi
 
