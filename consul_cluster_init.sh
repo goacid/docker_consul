@@ -7,7 +7,7 @@ done;
 c=$(echo $a|tr " " "\\n"|sort|uniq|sed -re "s/(^10.[0-9.]*):.*/-retry-join=\\1/");
 if [[ $c ]]; then
   total_server="$(echo ${c} | tr " " "\n"| grep -c join )"
-  if [[  total_server < 3 ]]; then
+  if [[  ${total_server} < 3 ]]; then
     echo "CONSUL_START=-server $c"
   else
     echo "CONSUL_START=$c"
