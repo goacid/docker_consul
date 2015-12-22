@@ -9,13 +9,13 @@ if [[ $(fleetctl list-units|egrep ^consul[@][1-3].service) ]]; then
   done
 fi
 if [[ $(echo ${#listip[@]}) -eq 0 ]]; then 
-  echo  "CONSUL_START=-server -bootstrap-expect 3">/tmp/consul.env
+  echo  "CONSUL_START=-server -bootstrap-expect 3"
 else
-  echo "CONSUL_START=${listip[@]}">/tmp/consul.env
+  echo "CONSUL_START=${listip[@]}"
 fi
 source /etc/environment
 if [[ $( echo "${listip[@]}" |grep $COREOS_PRIVATE_IPV4) ]]; then
-  echo "CONSUL_LOCAL=$COREOS_PRIVATE_IPV4">>/tmp/consul.env
+  echo "CONSUL_LOCAL=$COREOS_PRIVATE_IPV4"
 else
-  echo "CONSUL_LOCAL=">>/tmp/consul.env
+  echo "CONSUL_LOCAL="
 fi
